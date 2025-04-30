@@ -1,2 +1,2 @@
 # Zombot
-a metroidvania inspired by deac cells and zombotron
+a metroidvania inspired by Dead cells and Zombotron
