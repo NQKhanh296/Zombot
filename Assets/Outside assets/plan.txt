@@ -1,0 +1,101 @@
+enemies: "C:\Users\khanh\Downloads\The Dark Series\DARK Patreon Bundle\All 3 Sprites",
+	 "C:\Users\khanh\Downloads\The Dark Series\DARK Patreon Bundle\Sci-fi DARK Edition (3)\DARK Edition\Sprites\Hell Bot DARK",
+	 
+background and environtment and UI: "C:\Users\khanh\Downloads\The Dark Series\DARK Patreon Bundle"
+
+heroes: samurai + swordmaster
+boss: widow
+
+sword master:
+Main Sprite Sheet
+
+1. Static Idle (0)
+
+2. Idle (1-9)
+
+3. Walk (10-17)
+
+4. Run (18-25)
+
+5. Run Fast (26-33)
+
+6. Roll (34-41)
+
+7. Roll Attack (42-51)
+
+8. Slash 1 (52-58)
+
+9. Slash 2 (59-63)
+
+10. Slam Attack (64-68)
+
+11. Spin Attack (69-74)
+
+12. Block (75-80)
+
+13. Dash (81-86)
+
+14. Jump (87-89)
+
+15. Transition from Jump to Fall (90-93)
+
+16. Fall (94-96)
+
+17. Jump teleport (97-103)
+
+18. Appear from teleport (104-109)
+
+19. Fall Attack (110-118)
+
+20. Land/Crouch (use the 3rd frame for a static crouch) (119-122)
+
+21. Ledge Grab (123-127)
+
+22. Static Wall hold (128)
+
+23. Transition from Static wall hold to Wall slide (129-130)
+
+24. Wall slide (131-133)
+
+25. Wall Slide Stop (134-136)
+
+26. Hit (137-138)
+
+27. Death (139-144)
+
+
+samurai spear:
+idle 0-11
+run 12-19
+jump 20-23
+fall 28-31
+impact 32-37
+attack 38-56
+death 57-79
+
+samurai sword:
+idle 0-11
+run 12-19
+jump 20-23
+fall 28-31
+impact 32-37
+attack 38-61
+death 62-84
+
+widow boss:
+idle 0-8
+move 9-19
+attack 20-37
+blood split 38-53
+jump 54-69
+impact 70-79
+heal/buff 80-93
+take damage 94
+death 94-106
+
+dual slicer
+idle 0-8
+run 9-16
+attack 17-33
+hit 34
+death 35-40
