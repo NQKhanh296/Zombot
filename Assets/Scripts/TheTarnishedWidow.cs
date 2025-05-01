@@ -44,7 +44,7 @@ public class TheTarnishedWidow : Enemy
     {
         if (Time.time - lastAttackTime < attackSpeed || isAttacking) return;
 
-        float chance = Random.Range(0f, 1f);
+        float chance = UnityEngine.Random.Range(0f, 1f);
 
         isAttacking = true;
         canMove = false;
@@ -58,7 +58,7 @@ public class TheTarnishedWidow : Enemy
         {
             animator.SetTrigger("Split");
         }
-        else if (chance > 0.5f && chance <= 0.9f)
+        else if (chance > 0.5f && chance <= 0.7f)
         {
             animator.SetTrigger("Buff");
         }
@@ -142,29 +142,22 @@ public class TheTarnishedWidow : Enemy
         yield return new WaitForSeconds(resumeDelay);
         Resume();
     }
-    public void CollisionIgnore(bool ignore)
+    public void CollisionIgnoreEnabled()
     {
         Collider2D myCollider = GetComponent<Collider2D>();
         Collider2D playerCollider = Character.Instance != null ? Character.Instance.GetComponent<Collider2D>() : null;
         if (myCollider != null && playerCollider != null)
         {
-            Physics2D.IgnoreCollision(myCollider, playerCollider, ignore);
+            Physics2D.IgnoreCollision(myCollider, playerCollider, true);
         }
     }
-    private void CollisionIgnorePrivate(int num)
+    public void CollisionIgnoreDisabled()
     {
-        if (num >=1)
-        {
-            num = 1;
-        }
-        else {
-            num = 0;
-        }
         Collider2D myCollider = GetComponent<Collider2D>();
         Collider2D playerCollider = Character.Instance != null ? Character.Instance.GetComponent<Collider2D>() : null;
         if (myCollider != null && playerCollider != null)
         {
-            Physics2D.IgnoreCollision(myCollider, playerCollider, Convert.ToBoolean(num));
+            Physics2D.IgnoreCollision(myCollider, playerCollider, false);
         }
     }
     protected override void Immunity()

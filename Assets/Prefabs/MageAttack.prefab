@@ -122,6 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  knockbackForceX: 0
+  knockbackForceY: 0
+  knockbackDuration: 0.1
   damageWidth: 1.1
   damageHeight: 3.32
   playerLayer:

@@ -14,14 +14,14 @@ public class CollisionIgnoreCheck : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            widow.CollisionIgnore(true);
+            widow.CollisionIgnoreEnabled();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            widow.CollisionIgnore(false);
+            widow.CollisionIgnoreDisabled();
         }
     }
 }
