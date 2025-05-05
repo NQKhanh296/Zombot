@@ -58,7 +58,7 @@ public class TheTarnishedWidow : Enemy
         {
             animator.SetTrigger("Split");
         }
-        else if (chance > 0.5f && chance <= 0.7f)
+        else if (chance > 0.5f && chance <= 0.6f)
         {
             animator.SetTrigger("Buff");
         }
@@ -86,7 +86,7 @@ public class TheTarnishedWidow : Enemy
             float? knockbackForceX = null,
             float? knockbackForceY = null,
             float? knockbackDuration = null,
-            float hitStopDuration = 0.2f)
+            float hitStopDuration = 0.1f)
     {
         base.TakeDamage(damage, null, null, null, hitStopDuration);
     }

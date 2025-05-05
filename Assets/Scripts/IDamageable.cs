@@ -16,7 +16,7 @@ namespace Assets.Scripts
             float? knockbackForceX = null,
             float? knockbackForceY = null,
             float? knockbackDuration = null,
-            float hitStopDuration = 0.2f
+            float hitStopDuration = 0.1f
             );
     }
 }
