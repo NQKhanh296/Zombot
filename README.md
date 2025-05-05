@@ -1,2 +1,2 @@
 # Zombot
-a metroidvania inspired by Dead cells and Zombotron
+a 2d action game inspired by Dead cells and Zombotron
