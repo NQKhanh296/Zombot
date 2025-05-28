@@ -264,6 +264,10 @@ namespace Assets.Scripts
             {
                 StartCoroutine(ResetKnockbackAfterDelay(duration));
             }
+            else
+            {
+                Resume();
+            }
         }
 
         protected virtual IEnumerator ResetKnockbackAfterDelay(float delay)

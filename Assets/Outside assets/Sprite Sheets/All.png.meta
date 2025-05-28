@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -108,7 +108,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: All_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 455
+        width: 82
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db8cc38c22849624fb80c1cfbc9acc9d
+      internalID: -787315701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_46
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 455
+        width: 82
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94e06bc928d14304aa91559e7caeb9ee
+      internalID: 36597930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_47
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 455
+        width: 82
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3222536addc504540bcde3362209da28
+      internalID: 894174680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +182,118 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      All_0: -1104151305
+      All_1: 1910339001
+      All_10: 1499629886
+      All_100: -551827112
+      All_101: 688781115
+      All_102: 1418967700
+      All_103: -1363284439
+      All_104: -1825740606
+      All_105: -42388163
+      All_106: 368314965
+      All_107: 125331442
+      All_108: -1601209173
+      All_109: 1264916329
+      All_11: -1458694651
+      All_110: -105628033
+      All_12: 1885833605
+      All_13: 936900355
+      All_14: 1025030971
+      All_15: -225123857
+      All_16: -2070697692
+      All_17: -1194821527
+      All_18: -2036884381
+      All_19: -215506600
+      All_2: -1581397196
+      All_20: 186331705
+      All_21: -170909769
+      All_22: -2012462519
+      All_23: 215343668
+      All_24: -252374271
+      All_25: -2009525206
+      All_26: 506748772
+      All_27: 698809594
+      All_28: -1572460949
+      All_29: -1487679263
+      All_3: -1707148601
+      All_30: 440398865
+      All_31: 1017495073
+      All_32: 1241172354
+      All_33: -1554722366
+      All_34: -1358102883
+      All_35: -414740299
+      All_36: 417892341
+      All_37: 1775765435
+      All_38: -1740357759
+      All_39: 1761797355
+      All_4: -1095952867
+      All_40: -1123918466
+      All_41: 357068227
+      All_42: 552955076
+      All_43: -1538742185
+      All_44: -1043754651
+      All_45: -787315701
+      All_46: 36597930
+      All_47: 894174680
+      All_48: -1975763541
+      All_49: -1974457212
+      All_5: -1145390312
+      All_50: 1040520894
+      All_51: -15008650
+      All_52: 1130192552
+      All_53: 574159837
+      All_54: -2123084250
+      All_55: 2057216353
+      All_56: -1757177201
+      All_57: 1547238342
+      All_58: 1516655261
+      All_59: -728080636
+      All_6: -2129920822
+      All_60: 1924997531
+      All_61: -1815787871
+      All_62: -124311275
+      All_63: -2094773890
+      All_64: 225081462
+      All_65: 836105279
+      All_66: -1207091183
+      All_67: 258275089
+      All_68: -1835466316
+      All_69: 51001868
+      All_7: -407528407
+      All_70: -1201013269
+      All_71: -1754788165
+      All_72: 1722326777
+      All_73: 677386283
+      All_74: -922753068
+      All_75: 696391912
+      All_76: -494117439
+      All_77: -1119051960
+      All_78: 1311495510
+      All_79: -812174309
+      All_8: -981647004
+      All_80: -274681325
+      All_81: 300074062
+      All_82: -2079903831
+      All_83: 2011618067
+      All_84: 243661102
+      All_85: -2092124887
+      All_86: 1166300390
+      All_87: 1086563592
+      All_88: -356229738
+      All_89: -2064518659
+      All_9: 1796810019
+      All_90: -1536136147
+      All_91: 856821482
+      All_92: 1165412548
+      All_93: 1309370995
+      All_94: 303955503
+      All_95: -2022735354
+      All_96: -2089700171
+      All_97: -2034996741
+      All_98: -618196848
+      All_99: -822049373
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
