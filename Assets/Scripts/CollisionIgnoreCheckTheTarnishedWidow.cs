@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionIgnoreCheck : MonoBehaviour
+public class CollisionIgnoreCheckTheTarnishedWidow : MonoBehaviour
 {
     private TheTarnishedWidow widow;
 
