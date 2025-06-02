@@ -7,28 +7,13 @@ public class Mage : Enemy
 {
     #region Attack Configuration
     [Header("Attack Settings")]
-    [Tooltip("Current phase of the attack sequence (0 = idle, 1 = primary attack, 2 = secondary attack)")]
     protected int attackPhase = 0;
-
-    [Tooltip("Timestamp of the last attack execution")]
     protected float lastAttackTime = 0f;
-
-    [Tooltip("Time interval between attacks in seconds")]
     public float attackSpeed = 1f;
-
-    [Tooltip("Width of the melee damage detection box")]
     public float damageWidth = 0.5f;
-
-    [Tooltip("Height of the melee damage detection box")]
     public float damageHeight = 0.5f;
-
-    [Tooltip("Maximum random offset for attack positioning (higher = less precise)")]
     public float attackPrecision = 0.5f;
-
-    [Tooltip("Amount of health restored when using healing ability")]
     public int healingAmount = 20;
-
-    [Tooltip("Visual effect prefab spawned during magical attacks")]
     public GameObject attackVfx;
     #endregion
 

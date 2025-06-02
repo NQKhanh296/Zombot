@@ -10,98 +10,42 @@ namespace Assets.Scripts
     public abstract class Enemy : MonoBehaviour, IDamageable
     {
         [Header("Movement")]
-        /// <summary>Maximum distance from player before enemy stops following</summary>
         public float followRange;
-
-        /// <summary>Speed at which the enemy moves when following the player</summary>
         public float moveSpeed;
-
-        /// <summary>Transform point from which attacks are performed and range is calculated</summary>
         public Transform attackPoint;
-
-        /// <summary>Range within which the enemy can attack the player</summary>
         public float attackRange;
-
-        /// <summary>Layer mask to identify player objects</summary>
         public LayerMask playerLayer;
 
         [Header("Auto-Jump")]
-        /// <summary>Force applied when jumping over obstacles</summary>
         public float jumpForce = 12f;
-
-        /// <summary>Transform point from which obstacle detection rays are cast</summary>
         public Transform obstacleCheckPoint;
-
-        /// <summary>Distance of the obstacle detection raycast</summary>
         public float obstacleCheckDistance = 1f;
-
-        /// <summary>Layer mask for ground and obstacle detection</summary>
         public LayerMask groundLayer;
 
         [Header("Combat")]
-        /// <summary>Maximum health points of the enemy</summary>
         public int maxHP;
-
-        /// <summary>Damage dealt to player when attacking</summary>
         public int attackDamage;
-
-        /// <summary>Horizontal knockback force applied to player when hit</summary>
         public float knockbackForceX;
-
-        /// <summary>Vertical knockback force applied to player when hit</summary>
         public float knockbackForceY;
-
-        /// <summary>Duration for which knockback effects last</summary>
         public float knockbackDuration;
 
         [Header("Components")]
-        /// <summary>Rigidbody component for physics-based movement</summary>
         public Rigidbody2D rb;
-
-        /// <summary>Animator component for controlling enemy animations</summary>
         public Animator animator;
-
-        /// <summary>Box collider component for collision detection</summary>
         public BoxCollider2D boxCollider2D;
-
-        /// <summary>Sprite renderer for visual representation</summary>
         public SpriteRenderer spriteRenderer;
-
-        /// <summary>Color applied when enemy takes damage</summary>
         public Color hitColor = Color.white;
-
-        /// <summary>Duration for which hit effect is displayed</summary>
         public float takeHitDuration = 0.1f;
 
-        // Internal state variables
-        /// <summary>Reference to the current player character</summary>
         protected Character current_player;
-
-        /// <summary>Whether the enemy is facing right (true) or left (false)</summary>
         protected bool facingRight = false;
-
-        /// <summary>Whether the enemy can currently perform attacks</summary>
         protected bool canAttack = true;
-
-        /// <summary>Whether the enemy can currently move</summary>
         protected bool canMove = true;
-
-        /// <summary>Disables automatic sprite flipping when true</summary>
         protected bool disableFlip = false;
-
-        /// <summary>Current movement speed of the enemy</summary>
         protected float currentSpeed = 0;
-
-        /// <summary>Whether the enemy is currently being knocked back</summary>
         protected bool isKnockedBack = false;
-
-        /// <summary>Whether the enemy is currently touching the ground</summary>
         protected bool isGrounded = false;
-
-        /// <summary>Current health points of the enemy</summary>
         protected int currentHp;
-
-        /// <summary>Whether the player is within the enemy's follow range</summary>
         protected bool isPlayerInRange = false;
 
         //================== UNITY ==================//

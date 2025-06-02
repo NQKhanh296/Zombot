@@ -6,41 +6,19 @@ using UnityEngine;
 public class Assassin : Enemy
 {
     [Header("Attack")]
-    /// <summary>Current phase of the attack combo (1-3)</summary>
     protected int attackPhase = 0;
-
-    /// <summary>Time when the last attack was performed</summary>
     protected float lastAttackTime = 0f;
-
-    /// <summary>Time between attacks (lower = faster attacks)</summary>
     public float attackSpeed = 1f;
-
-    /// <summary>Width of the damage detection box</summary>
     public float damageWidth = 0.5f;
-
-    /// <summary>Height of the damage detection box</summary>
     public float damageHeight = 0.5f;
 
     [Header("Dash")]
-    /// <summary>Maximum distance the assassin can dash</summary>
     public float dashDistance = 10f;
-
-    /// <summary>Speed at which the assassin moves during dash</summary>
     public float dashSpeed = 10f;
-
-    /// <summary>Cooldown time between dash attempts</summary>
     public float dashCooldown = 3f;
-
-    /// <summary>Layers that the assassin will collide with during dash (stops dash on collision)</summary>
     public LayerMask collidableLayersWhenDash;
-
-    /// <summary>Whether the assassin is currently able to initiate a dash</summary>
     protected bool canDash = true;
-
-    /// <summary>Whether the assassin is currently performing a dash</summary>
     protected bool isDashing = false;
-
-    /// <summary>Time when the last dash was performed</summary>
     protected float lastDashTime = Mathf.NegativeInfinity;
 
     //================== MAIN LOGIC ==================//

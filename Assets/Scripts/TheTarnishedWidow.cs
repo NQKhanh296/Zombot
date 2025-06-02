@@ -9,27 +9,27 @@ using System;
 public class TheTarnishedWidow : Enemy
 {
     [Header("Attack")]
-    [SerializeField] private float attackSpeed = 1f;           // Time between attacks
-    [SerializeField] private float damageWidth = 0.5f;          // Width of attack hitbox
-    [SerializeField] private float damageHeight = 0.5f;         // Height of attack hitbox
-    [SerializeField] private float reappearDelay = 1f;          // Delay before reappearing during special attack
-    [SerializeField] private float resumeDelay = 1f;            // Delay before resuming normal behavior after special attack
-    [SerializeField] private float endImmunityDelay = 1f;       // How long immunity lasts after reappearing
-    [SerializeField] private int healingAmount = 50;            // Amount of HP restored when healing
+    [SerializeField] private float attackSpeed = 1f;           
+    [SerializeField] private float damageWidth = 0.5f;         
+    [SerializeField] private float damageHeight = 0.5f;         
+    [SerializeField] private float reappearDelay = 1f;          
+    [SerializeField] private float resumeDelay = 1f;            
+    [SerializeField] private float endImmunityDelay = 1f;       
+    [SerializeField] private int healingAmount = 50;           
 
     [Header("UI & Camera")]
-    [SerializeField] private StatusBar healthBar;               // Boss health bar UI
-    [SerializeField] private CinemachineVirtualCamera virtualCamera; // Camera for shake effects
-    [SerializeField] private float cameraShakeDuration = 0.5f;  // Duration of camera shake
+    [SerializeField] private StatusBar healthBar;               
+    [SerializeField] private CinemachineVirtualCamera virtualCamera; 
+    [SerializeField] private float cameraShakeDuration = 0.5f;  
 
     // Component references
-    private CameraShake cameraShake;        // Camera shake component
+    private CameraShake cameraShake;        
 
     // State tracking
-    private Vector2 targetPosition;         // Position to teleport to during special attack
-    private bool isAttacking = false;       // Whether boss is currently attacking
-    private int attackPhase = 0;           // Current attack phase (unused in current implementation)
-    private float lastAttackTime = 0f;     // Time of last attack (for attack cooldown)
+    private Vector2 targetPosition;        
+    private bool isAttacking = false;      
+    private int attackPhase = 0;          
+    private float lastAttackTime = 0f;    
 
     /// <summary>
     /// Initialize boss-specific components and health bar

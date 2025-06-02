@@ -7,55 +7,25 @@ public class SwordMaster : Character
 {
     #region Attack System
     [Header("Combat Settings")]
-    [Tooltip("Current phase in the 4-hit combo sequence (1-4, cycles back to 1)")]
     private int attackPhase = 0;
-
-    [Tooltip("Timestamp of the last attack execution for cooldown management")]
     private float lastAttackTime = 0f;
-
-    [Tooltip("Time interval between attacks in seconds")]
     public float attackSpeed = 0.5f;
-
-    [Tooltip("Transform point where damage detection originates")]
     public Transform attackPoint;
-
-    [Tooltip("Width of the melee damage detection box")]
     public float damageWidth = 0.5f;
-
-    [Tooltip("Height of the melee damage detection box")]
     public float damageHeight = 0.5f;
-
-    [Tooltip("Layer mask for enemy detection during attacks")]
     public LayerMask enemyLayer;
-
-    [Tooltip("Layer mask for collision detection during dash (walls, obstacles)")]
     public LayerMask collidableLayers;
-
-    [Tooltip("Base damage dealt per attack")]
     public int attackDamage = 40;
     #endregion
 
     #region Dash System
     [Header("Dash Ability")]
-    [Tooltip("Whether the dash ability is currently available")]
     private bool canDash = true;
-
-    [Tooltip("Whether the character is currently performing a dash")]
     private bool isDashing;
-
-    [Tooltip("Distance covered during a single dash")]
     public float dashDistance = 10f;
-
-    [Tooltip("Speed of dash movement")]
     public float dashSpeed = 10f;
-
-    [Tooltip("Cooldown time before dash can be used again")]
     public float dashCooldown = 1f;
-
-    [Tooltip("UI bar displaying dash availability/cooldown")]
     public StatusBar dashBar;
-
-    [Tooltip("Maximum value for the dash bar (typically 1 for full availability)")]
     public int dashbarMaxValue = 1;
     #endregion
 

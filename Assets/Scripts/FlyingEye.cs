@@ -6,40 +6,17 @@ using UnityEngine;
 
 public class FlyingEye : Enemy
 {
-    /// <summary>Current attack phase (1 or 2) for alternating between different attacks</summary>
     private int attackPhase = 0;
-
-    /// <summary>Time when the last attack was performed</summary>
     private float lastAttackTime = 0f;
-
-    /// <summary>Cooldown time between attacks (lower = faster attacks)</summary>
     public float attackSpeed = 1f;
-
-    /// <summary>First attack point transform for attack pattern 1</summary>
     public Transform attackPoint1;
-
-    /// <summary>Second attack point transform for attack pattern 2</summary>
     public Transform attackPoint2;
-
-    /// <summary>Detection range for the first attack point</summary>
     public float attackRange1 = 0.5f;
-
-    /// <summary>Detection range for the second attack point</summary>
     public float attackRange2 = 0.5f;
-
-    /// <summary>Current active attack range for attack point 1 (can be modified at runtime)</summary>
     private float currAttackRange1;
-
-    /// <summary>Current active attack range for attack point 2 (can be modified at runtime)</summary>
     private float currAttackRange2;
-
-    /// <summary>Default height above ground that the enemy maintains while flying</summary>
     public float flyHeight = 1.5f;
-
-    /// <summary>Current fly height (can be temporarily modified for obstacle avoidance)</summary>
     private float currentFlyHeight;
-
-    /// <summary>Which attack point is currently active (1 or 2)</summary>
     private int currAttackPoint;
 
     /// <summary>

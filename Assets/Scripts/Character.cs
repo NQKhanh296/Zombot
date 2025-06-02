@@ -16,39 +16,39 @@ namespace Assets.Scripts
     {
         #region Public Fields - Character Stats
         [Header("Movement Settings")]
-        public float moveSpeed = 400;           // Base movement speed of the character
-        public int jumpStrength = 15;           // Force applied when jumping
+        public float moveSpeed = 400;          
+        public int jumpStrength = 15;       
 
         [Header("Health Settings")]
-        public int maxHp = 300;                 // Maximum health points
+        public int maxHp = 300;                
 
         [Header("Physics & Animation")]
-        public Rigidbody2D rb;                  // Physics body component
-        public Animator animator;               // Animation controller
-        public Collider2D playerCollider;       // Collider for character hitbox
+        public Rigidbody2D rb;                  
+        public Animator animator;               
+        public Collider2D playerCollider;       
 
         [Header("Ground Detection")]
-        public LayerMask groundLayer;           // Layer mask for ground detection
-        public float groundCheckDistance = 0.2f; // Distance to check for ground below character
+        public LayerMask groundLayer;           
+        public float groundCheckDistance = 0.2f; 
 
         [Header("UI & Visual Feedback")]
-        public StatusBar healthBar;             // Health bar UI component
-        public SpriteRenderer spriteRenderer;   // Sprite renderer for visual effects
-        public Color hitColor = Color.white;    // Color applied when taking damage
-        public float takeHitDuration = 0.1f;    // Duration of hit effect visibility
+        public StatusBar healthBar;            
+        public SpriteRenderer spriteRenderer;   
+        public Color hitColor = Color.white;   
+        public float takeHitDuration = 0.1f;    
         #endregion
 
         #region Protected Fields - Internal State
-        protected float currentSpeed = 0;       // Current movement speed (can be modified by effects)
-        protected int currentHp;                // Current health points
-        protected bool facingRight = true;      // Direction the character is facing
-        protected bool isJumping = false;       // True when character is in upward jump motion
-        protected bool isFalling = false;       // True when character is falling downward
-        protected bool isGrounded = false;      // True when character is touching ground
-        protected bool controlDisabled = false; // True when player input is disabled (knockback, etc.)
-        protected bool isAttacking = false;     // True when character is performing an attack
-        protected bool isAlive = true;          // False when character has died
-        protected MaterialPropertyBlock propertyBlock; // Used for shader property manipulation
+        protected float currentSpeed = 0;       
+        protected int currentHp;                
+        protected bool facingRight = true;      
+        protected bool isJumping = false;      
+        protected bool isFalling = false;      
+        protected bool isGrounded = false;      
+        protected bool controlDisabled = false; 
+        protected bool isAttacking = false;     
+        protected bool isAlive = true;         
+        protected MaterialPropertyBlock propertyBlock; 
         #endregion
 
         #region Singleton Pattern
