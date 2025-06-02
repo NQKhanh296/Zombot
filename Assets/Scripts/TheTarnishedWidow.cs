@@ -9,77 +9,123 @@ using System;
 public class TheTarnishedWidow : Enemy
 {
     [Header("Attack")]
-    public float attackSpeed = 0.5f;
-    public float damageWidth = 0.5f;
-    public float damageHeight = 0.5f;
-    public float reappearDelay = 1f;
-    public float resumeDelay = 1f;
-    public float endImmunityDelay = 1f;
-    public int healingAmount = 50;
-    public StatusBar healthBar;
-    public CinemachineVirtualCamera virtualCamera;
-    public float cameraShakeDuration = 0.5f;
-    protected CameraShake cameraShake;
-    protected Vector2 targetPosition;
-    protected bool isAttacking = false;
-    protected int attackPhase = 0;
-    protected float lastAttackTime = 0f;
+    [SerializeField] private float attackSpeed = 1f;           // Time between attacks
+    [SerializeField] private float damageWidth = 0.5f;          // Width of attack hitbox
+    [SerializeField] private float damageHeight = 0.5f;         // Height of attack hitbox
+    [SerializeField] private float reappearDelay = 1f;          // Delay before reappearing during special attack
+    [SerializeField] private float resumeDelay = 1f;            // Delay before resuming normal behavior after special attack
+    [SerializeField] private float endImmunityDelay = 1f;       // How long immunity lasts after reappearing
+    [SerializeField] private int healingAmount = 50;            // Amount of HP restored when healing
+
+    [Header("UI & Camera")]
+    [SerializeField] private StatusBar healthBar;               // Boss health bar UI
+    [SerializeField] private CinemachineVirtualCamera virtualCamera; // Camera for shake effects
+    [SerializeField] private float cameraShakeDuration = 0.5f;  // Duration of camera shake
+
+    // Component references
+    private CameraShake cameraShake;        // Camera shake component
+
+    // State tracking
+    private Vector2 targetPosition;         // Position to teleport to during special attack
+    private bool isAttacking = false;       // Whether boss is currently attacking
+    private int attackPhase = 0;           // Current attack phase (unused in current implementation)
+    private float lastAttackTime = 0f;     // Time of last attack (for attack cooldown)
+
+    /// <summary>
+    /// Initialize boss-specific components and health bar
+    /// </summary>
     protected override void Awake()
     {
         base.Awake();
+
+        // Set up health bar with max HP
         healthBar.SetMaxValue(maxHP);
+
+        // Get camera shake component
         cameraShake = virtualCamera.GetComponent<CameraShake>();
     }
+
+    /// <summary>
+    /// Update boss state every fixed frame
+    /// </summary>
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+
+        // Update animator with attack state
         animator.SetBool("IsAttacking", isAttacking);
+
+        // Update health bar display
         healthBar.SetValue(currentHp);
+
+        // Show health bar when player is in range
         if (isPlayerInRange)
         {
             healthBar.gameObject.SetActive(true);
         }
     }
+
+    /// <summary>
+    /// Execute attack behavior with multiple attack patterns based on random chance
+    /// </summary>
     protected override void AttackPlayer()
     {
+        // Check attack cooldown and prevent multiple simultaneous attacks
         if (Time.time - lastAttackTime < attackSpeed || isAttacking) return;
 
+        // Generate random value to determine attack type
         float chance = UnityEngine.Random.Range(0f, 1f);
 
+        // Set attack state and disable movement/flipping
         isAttacking = true;
         canMove = false;
         disableFlip = true;
 
-        if (chance <= 0.3f)
+        // Choose attack based on probability
+        if (chance <= 0.3f)                    // 30% chance - Basic attack
         {
             animator.SetTrigger("Attack");
         }
-        else if (chance > 0.3f && chance <= 0.5f)
+        else if (chance > 0.3f && chance <= 0.5f)  // 20% chance - Split attack
         {
             animator.SetTrigger("Split");
         }
-        else if (chance > 0.5f && chance <= 0.6f)
+        else if (chance > 0.5f && chance <= 0.6f)  // 10% chance - Buff/Heal
         {
             animator.SetTrigger("Buff");
         }
-        else
+        else                                   // 40% chance - Special teleport attack
         {
             StartSpecialAttack();
         }
 
         lastAttackTime = Time.time;
     }
+
+    /// <summary>
+    /// Reset boss state after attack completes
+    /// Called by animation events
+    /// </summary>
     protected override void EndAttack()
     {
         canMove = true;
         isAttacking = false;
         disableFlip = false;
     }
+
+    /// <summary>
+    /// Coroutine to reset flip disable after short delay
+    /// </summary>
     private IEnumerator ResetFlip()
     {
         yield return new WaitForSeconds(0.5f);
         disableFlip = false;
     }
+
+    /// <summary>
+    /// Override damage taking to customize boss damage behavior
+    /// Ignores knockback parameters for boss stability
+    /// </summary>
     public override void TakeDamage(
             int damage,
             Transform damageSource = null,
@@ -88,21 +134,33 @@ public class TheTarnishedWidow : Enemy
             float? knockbackDuration = null,
             float hitStopDuration = 0.1f)
     {
+        // Call base damage method but ignore knockback for boss
         base.TakeDamage(damage, null, null, null, hitStopDuration);
     }
 
+    /// <summary>
+    /// Handle boss death - trigger death animation
+    /// </summary>
     protected override void Die()
     {
         animator.SetTrigger("Die");
     }
+
+    /// <summary>
+    /// Deal damage to player using box cast detection
+    /// Called by animation events during attack animations
+    /// </summary>
     protected override void Damage()
     {
+        // Determine attack direction based on facing direction
         Vector2 direction = facingRight ? Vector2.right : Vector2.left;
         Vector2 size = new(damageWidth, damageHeight);
         Vector2 origin = (Vector2)attackPoint.position;
 
+        // Cast box to detect player in attack range
         RaycastHit2D[] hits = Physics2D.BoxCastAll(origin, size, 0f, direction, 0.1f, playerLayer);
 
+        // Apply damage to all hit players
         foreach (var hit in hits)
         {
             var player = hit.collider.GetComponentInParent<Character>();
@@ -112,81 +170,149 @@ public class TheTarnishedWidow : Enemy
             }
         }
     }
+
+    /// <summary>
+    /// Trigger camera shake effect
+    /// Called by animation events
+    /// </summary>
     private void CamShake()
     {
         cameraShake.Shake(cameraShakeDuration);
     }
+
+    /// <summary>
+    /// Initialize special teleport attack sequence
+    /// </summary>
     private void StartSpecialAttack()
     {
         StartCoroutine(SpecialAttackRoutine());
     }
+
+    /// <summary>
+    /// Load win scene when boss is defeated
+    /// Called by animation events or death logic
+    /// </summary>
     protected virtual void LoadWinScene()
     {
         SceneManager.LoadScene("GameOver(Win)");
     }
+
+    /// <summary>
+    /// Execute complex special attack sequence:
+    /// 1. Stop movement and jump
+    /// 2. Disappear and become invulnerable
+    /// 3. Track player position
+    /// 4. Reappear at player's X position
+    /// 5. End immunity and resume normal behavior
+    /// </summary>
     private IEnumerator SpecialAttackRoutine()
     {
-        Stop();
-        disableFlip = true;
-        Jump();
-        isAttacking = true;
-        yield return new WaitForSeconds(reappearDelay);
-        GetPlayerPositionX();
-        yield return new WaitForSeconds(0.1f); 
+        // Phase 1: Preparation
+        Stop();                           // Stop all movement
+        disableFlip = true;              // Prevent direction changes
+        Jump();                          // Trigger jump animation
+        isAttacking = true;              // Set attacking state
 
-        Reappear();
-        EndImmunity();
+        // Phase 2: Disappear
+        yield return new WaitForSeconds(reappearDelay);
+        GetPlayerPositionX();            // Get target position
+        yield return new WaitForSeconds(0.1f);
+
+        // Phase 3: Reappear and attack
+        Reappear();                      // Teleport to target position
+        EndImmunity();                   // Remove invulnerability
         yield return new WaitForSeconds(endImmunityDelay);
+
+        // Phase 4: Recovery
         isAttacking = false;
         disableFlip = false;
         yield return new WaitForSeconds(resumeDelay);
-        Resume();
+        Resume();                        // Resume normal AI behavior
     }
+
+    /// <summary>
+    /// Enable collision ignoring between boss and player
+    /// Used during teleport attack to prevent collision issues
+    /// Called by animation events
+    /// </summary>
     public void CollisionIgnoreEnabled()
     {
         Collider2D myCollider = GetComponent<Collider2D>();
         Collider2D playerCollider = Character.Instance != null ? Character.Instance.GetComponent<Collider2D>() : null;
+
         if (myCollider != null && playerCollider != null)
         {
             Physics2D.IgnoreCollision(myCollider, playerCollider, true);
         }
     }
+
+    /// <summary>
+    /// Disable collision ignoring between boss and player
+    /// Called by animation events
+    /// </summary>
     public void CollisionIgnoreDisabled()
     {
         Collider2D myCollider = GetComponent<Collider2D>();
         Collider2D playerCollider = Character.Instance != null ? Character.Instance.GetComponent<Collider2D>() : null;
+
         if (myCollider != null && playerCollider != null)
         {
             Physics2D.IgnoreCollision(myCollider, playerCollider, false);
         }
     }
+
+    /// <summary>
+    /// Make boss invulnerable by changing to Invincible layer
+    /// </summary>
     protected override void Immunity()
     {
         gameObject.layer = LayerMask.NameToLayer("Invincible");
     }
 
+    /// <summary>
+    /// Remove boss invulnerability by changing back to Boss layer
+    /// </summary>
     protected override void EndImmunity()
     {
         gameObject.layer = LayerMask.NameToLayer("Boss");
     }
+
+    /// <summary>
+    /// Trigger jump animation for special attack
+    /// Called by animation events
+    /// </summary>
     private void Jump()
     {
         animator.SetTrigger("Jump");
     }
+
+    /// <summary>
+    /// Make boss disappear and become invulnerable
+    /// Called by animation events during special attack
+    /// </summary>
     private void Disappear()
     {
-        Immunity();
-        rb.velocity = Vector2.zero;
-        spriteRenderer.enabled = false;
-    }
-    private void Reappear()
-    {
-        rb.velocity = Vector2.zero;
-        transform.position = targetPosition;
-        spriteRenderer.enabled = true;
-        animator.SetTrigger("Impact");
+        Immunity();                      // Become invulnerable
+        rb.velocity = Vector2.zero;      // Stop all movement
+        spriteRenderer.enabled = false;  // Hide visual
     }
 
+    /// <summary>
+    /// Make boss reappear at target position with impact effect
+    /// Called by animation events during special attack
+    /// </summary>
+    private void Reappear()
+    {
+        rb.velocity = Vector2.zero;              // Ensure no residual movement
+        transform.position = targetPosition;     // Teleport to target
+        spriteRenderer.enabled = true;          // Show visual
+        animator.SetTrigger("Impact");          // Trigger impact animation
+    }
+
+    /// <summary>
+    /// Store player's X position for teleport attack targeting
+    /// Maintains boss's current Y position
+    /// </summary>
     private void GetPlayerPositionX()
     {
         if (Character.Instance != null)
@@ -195,10 +321,17 @@ public class TheTarnishedWidow : Enemy
             targetPosition = new Vector2(playerPos.x, transform.position.y);
         }
     }
-    
+
+    /// <summary>
+    /// Restore boss health by specified healing amount
+    /// Called by animation events during buff/heal attack
+    /// </summary>
     private void Heal()
     {
+        // Don't heal if at max HP or dead
         if (currentHp >= maxHP || currentHp == 0) return;
+
+        // Clamp healing to max HP
         if (currentHp + healingAmount > maxHP)
         {
             currentHp = maxHP;
@@ -208,9 +341,15 @@ public class TheTarnishedWidow : Enemy
             currentHp += healingAmount;
         }
     }
+
+    /// <summary>
+    /// Draw debug gizmos for attack hitbox visualization in editor
+    /// </summary>
     protected override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
+
+        // Draw attack hitbox
         if (attackPoint != null)
         {
             Gizmos.color = Color.red;

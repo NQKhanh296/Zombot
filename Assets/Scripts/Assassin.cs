@@ -13,7 +13,7 @@ public class Assassin : Enemy
     protected float lastAttackTime = 0f;
 
     /// <summary>Time between attacks (lower = faster attacks)</summary>
-    public float attackSpeed = 0.5f;
+    public float attackSpeed = 1f;
 
     /// <summary>Width of the damage detection box</summary>
     public float damageWidth = 0.5f;

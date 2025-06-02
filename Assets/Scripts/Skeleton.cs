@@ -7,7 +7,7 @@ public class Skeleton : Enemy
 {
     private int attackPhase = 0;
     private float lastAttackTime = 0f;
-    public float attackSpeed = 0.5f;
+    public float attackSpeed = 1f;
     protected override void AttackPlayer()
     {
         if (Time.time - lastAttackTime > attackSpeed)

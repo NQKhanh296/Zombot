@@ -14,7 +14,7 @@ public class Mage : Enemy
     protected float lastAttackTime = 0f;
 
     [Tooltip("Time interval between attacks in seconds")]
-    public float attackSpeed = 0.5f;
+    public float attackSpeed = 1f;
 
     [Tooltip("Width of the melee damage detection box")]
     public float damageWidth = 0.5f;

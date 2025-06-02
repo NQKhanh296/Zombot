@@ -13,7 +13,7 @@ public class FlyingEye : Enemy
     private float lastAttackTime = 0f;
 
     /// <summary>Cooldown time between attacks (lower = faster attacks)</summary>
-    public float attackSpeed = 0.5f;
+    public float attackSpeed = 1f;
 
     /// <summary>First attack point transform for attack pattern 1</summary>
     public Transform attackPoint1;

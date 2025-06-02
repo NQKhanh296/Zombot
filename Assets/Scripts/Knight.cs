@@ -7,7 +7,7 @@ public class Knight : Character
 {
     private int attackPhase = 0;
     private float lastAttackTime = 0f;
-    public float attackSpeed = 0.5f;
+    public float attackSpeed = 1f;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayer;

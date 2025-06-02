@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,11 +20,12 @@ namespace Assets.Scripts
         public int jumpStrength = 15;           // Force applied when jumping
 
         [Header("Health Settings")]
-        public int maxHealth = 100;             // Maximum health points
+        public int maxHp = 300;                 // Maximum health points
 
         [Header("Physics & Animation")]
         public Rigidbody2D rb;                  // Physics body component
         public Animator animator;               // Animation controller
+        public Collider2D playerCollider;       // Collider for character hitbox
 
         [Header("Ground Detection")]
         public LayerMask groundLayer;           // Layer mask for ground detection
@@ -31,14 +33,14 @@ namespace Assets.Scripts
 
         [Header("UI & Visual Feedback")]
         public StatusBar healthBar;             // Health bar UI component
-        public SpriteRenderer spriteRenderer;  // Sprite renderer for visual effects
+        public SpriteRenderer spriteRenderer;   // Sprite renderer for visual effects
         public Color hitColor = Color.white;    // Color applied when taking damage
         public float takeHitDuration = 0.1f;    // Duration of hit effect visibility
         #endregion
 
         #region Protected Fields - Internal State
         protected float currentSpeed = 0;       // Current movement speed (can be modified by effects)
-        protected int currentHealth;            // Current health points
+        protected int currentHp;                // Current health points
         protected bool facingRight = true;      // Direction the character is facing
         protected bool isJumping = false;       // True when character is in upward jump motion
         protected bool isFalling = false;       // True when character is falling downward
@@ -78,9 +80,9 @@ namespace Assets.Scripts
                 Debug.LogWarning("Multiple Character instances in scene!");
 
             // Initialize character stats
-            currentHealth = maxHealth;
+            currentHp = maxHp;
             currentSpeed = moveSpeed;
-            healthBar.SetMaxValue(maxHealth);
+            healthBar.SetMaxValue(maxHp);
         }
 
         /// <summary>
@@ -107,14 +109,14 @@ namespace Assets.Scripts
             GroundCheck();
 
             // Check for death condition
-            if (currentHealth <= 0)
+            if (currentHp <= 0)
             {
                 isAlive = false;
                 Die();
             }
 
             // Update UI and animation states
-            healthBar.SetValue(currentHealth);
+            healthBar.SetValue(currentHp);
             animator.SetBool("IsJumping", isJumping);
             animator.SetBool("IsFalling", isFalling);
             animator.SetBool("IsAlive", isAlive);
@@ -241,7 +243,7 @@ namespace Assets.Scripts
             StartCoroutine(ResetOpacity());
 
             // Apply damage to health
-            currentHealth -= damage;
+            currentHp -= damage;
 
             // Apply hit stop effect (brief time freeze)
             if (hitStopDuration > 0)
@@ -329,6 +331,25 @@ namespace Assets.Scripts
         protected virtual void Die() { }
 
         /// <summary>
+        /// A method to heal the character by a specified amount
+        /// </summary>
+        public virtual void Heal(int healingAmount)
+        {
+            // Don't heal if at max HP or dead
+            if (currentHp >= maxHp || currentHp == 0) return;
+
+            // Clamp healing to max HP
+            if (currentHp + healingAmount > maxHp)
+            {
+                currentHp = maxHp;
+            }
+            else
+            {
+                currentHp += healingAmount;
+            }
+        }
+
+        /// <summary>
         /// Virtual method to destroy the character GameObject
         /// </summary>
         protected virtual void DestroyObject()
@@ -353,6 +374,17 @@ namespace Assets.Scripts
         public virtual Transform GetTransform()
         {
             return transform;
+        }
+
+        public virtual Vector2 GetColliderCenter()
+        {
+            if (playerCollider != null)
+            {
+                return playerCollider.bounds.center;
+            }
+
+            // Fallback to transform position if no collider found
+            return transform.position;
         }
 
         /// <summary>
